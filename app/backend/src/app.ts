@@ -1,15 +1,22 @@
 import * as express from 'express';
+import 'express-async-errors';
+import teamRoutes from './routes/teamRoutes';
 
 class App {
   public app: express.Express;
 
   constructor() {
     this.app = express();
-
     this.config();
+    this.initRoutes();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    // this.app.get('/', teamRoutes);
+  }
+
+  private initRoutes(): void {
+    this.app.use(teamRoutes);
   }
 
   private config():void {

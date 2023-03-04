@@ -8,8 +8,8 @@ export default class TeamController {
     this._teamService = teamService;
   }
 
-  async findAll(req: Request, res: Response) {
-    const result = await this._teamService.findAll();
+  async readAll(req: Request, res: Response) {
+    const result = await this._teamService.readAll();
     return res.status(200).json(result);
   }
 }

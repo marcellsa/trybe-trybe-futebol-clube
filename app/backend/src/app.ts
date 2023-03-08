@@ -1,5 +1,7 @@
 import * as express from 'express';
 import 'express-async-errors';
+import errorMiddleware from './middlewares/errorMiddleware';
+import loginRoutes from './routes/loginRoutes';
 import teamRoutes from './routes/teamRoutes';
 
 class App {
@@ -12,12 +14,18 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
-    // this.app.get('/', teamRoutes);
+    this.app.use(errorMiddleware);
+    // this.initMiddlewares();
   }
 
   private initRoutes(): void {
     this.app.use(teamRoutes);
+    this.app.use(loginRoutes);
   }
+
+  // private initMiddlewares() {
+  //   this.app.use(errorMiddleware);
+  // }
 
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {

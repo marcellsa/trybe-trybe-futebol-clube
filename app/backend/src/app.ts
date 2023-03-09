@@ -1,8 +1,8 @@
 import * as express from 'express';
 import 'express-async-errors';
-import errorMiddleware from './middlewares/errorMiddleware';
 import loginRoutes from './routes/loginRoutes';
 import teamRoutes from './routes/teamRoutes';
+import errorMiddleware from './middlewares/errorMiddleware';
 
 class App {
   public app: express.Express;

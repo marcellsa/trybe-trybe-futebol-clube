@@ -1,8 +1,8 @@
 import * as Joi from 'joi';
 
 const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
+  email: Joi.string().email({ tlds: { allow: false } }).required(),
+  password: Joi.string().min(6).required(),
 });
 
 const checkLoginFields = (email: string, password: string) => {

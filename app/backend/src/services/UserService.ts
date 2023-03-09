@@ -16,6 +16,6 @@ export default class UserService implements IUserService {
       const token = generateToken(userFound);
       return token;
     }
-    throw new HttpException(401, 'Incorrect email or password');
+    throw new HttpException(401, 'Invalid email or password');
   }
 }

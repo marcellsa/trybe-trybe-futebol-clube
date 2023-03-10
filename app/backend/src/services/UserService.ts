@@ -18,4 +18,12 @@ export default class UserService implements IUserService {
     }
     throw new HttpException(401, 'Invalid email or password');
   }
+
+  async getRole(email: string): Promise<string | void> {
+    const user = await this.model.findOne({ where: { email } });
+    if (!user) {
+      throw new HttpException(401, 'Invalid email or password');
+    }
+    return user.role;
+  }
 }

@@ -9,7 +9,7 @@ const authMiddleware: RequestHandler = async (req, res, next) => {
   }
 
   try {
-    const token = jwt.verify(authorization, process.env.JWT as string);
+    const token = jwt.verify(authorization, process.env.JWT_SECRET as string);
     req.body.user = token;
     next();
   } catch (error) {

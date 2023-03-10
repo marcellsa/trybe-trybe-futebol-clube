@@ -7,9 +7,7 @@ const loginSchema = Joi.object({
 
 const checkLoginFields = (email: string, password: string) => {
   const { error } = loginSchema.validate({ email, password });
-  if (error) {
-    return 'All fields must be filled';
-  }
+  return error;
 };
 
 export default checkLoginFields;

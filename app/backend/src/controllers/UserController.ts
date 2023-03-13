@@ -15,8 +15,8 @@ export default class UserController {
   }
 
   async getRole(req: Request, res: Response) {
-    const { email } = req.body;
-    const result = await this._service.getRole(email);
+    const token = req.headers.authorization;
+    const result = await this._service.getRole(token);
     return res.status(200).json({ role: result });
   }
 }

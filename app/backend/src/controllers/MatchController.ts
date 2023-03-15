@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import IMatch from '../interfaces/IMatch';
 import IMatchService from '../interfaces/IMatchService';
 
 export default class MatchController {
@@ -9,7 +10,12 @@ export default class MatchController {
   }
 
   async getAll(req: Request, res: Response) {
-    const result = await this._service.getAll();
+    let result: IMatch[] = [];
+    if (req.query.inProgress) {
+      result = await this._service.filterInProgress(req.query.inProgress === 'true');
+    } else {
+      result = await this._service.getAll();
+    }
     return res.status(200).json(result);
   }
 }

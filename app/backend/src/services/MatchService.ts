@@ -16,4 +16,17 @@ export default class MatchService implements IMatchService {
     });
     return matches;
   }
+
+  async filterInProgress(query: boolean): Promise<IMatch[]> {
+    const matches = await this.model.findAll({
+      where: {
+        inProgress: query,
+      },
+      include: [
+        { model: Team, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } },
+      ],
+    });
+    return matches;
+  }
 }

@@ -5,10 +5,9 @@ import Team from './TeamModel';
 
 class Match extends Model implements IMatch {
   declare readonly id: number;
-  declare homeName: number;
-  declare homeTeam: number;
+  declare homeTeamId: number;
   declare homeTeamGoals: number;
-  declare awayTeam: number;
+  declare awayTeamId: number;
   declare awayTeamGoals: number;
   declare inProgress: boolean;
 }
@@ -49,11 +48,11 @@ Match.init({
 });
 
 Team.hasMany(Match, {
-  foreignKey: 'homeTeamId', as: 'home_team_id',
+  foreignKey: 'homeTeamId', as: 'homeTeam',
 });
 
 Team.hasMany(Match, {
-  foreignKey: 'awayTeamId', as: 'away_team_id',
+  foreignKey: 'awayTeamId', as: 'awayTeam',
 });
 
 Match.belongsTo(Team, {

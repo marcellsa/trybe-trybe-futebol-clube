@@ -20,8 +20,14 @@ export default class MatchController {
   }
 
   async finishMatch(req: Request, res: Response) {
-    const { id } = req.body;
+    const { id } = req.params;
     await this._service.finishMatch(+id);
     return res.status(200).json({ message: 'Finished' });
+  }
+
+  async updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    await this._service.updateMatch(+id);
+    return res.status(200).json({ message: 'Updated' });
   }
 }

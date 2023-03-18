@@ -37,11 +37,11 @@ export default class MatchService implements IMatchService {
     );
   }
 
-  async updateMatch(id: number): Promise<void> {
+  async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void> {
     await this.model.update(
       {
-        homeTeamGoals: 3,
-        awayTeamGoals: 1,
+        homeTeamGoals,
+        awayTeamGoals,
       },
       { where: { id } },
     );

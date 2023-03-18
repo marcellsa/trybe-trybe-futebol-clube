@@ -3,9 +3,11 @@ import Match from '../database/models/MatchModel';
 import Team from '../database/models/TeamModel';
 import IMatch from '../interfaces/IMatch';
 import IMatchService from '../interfaces/IMatchService';
+import HttpException from '../utils/HttpException';
 
 export default class MatchService implements IMatchService {
   protected model: ModelStatic<Match> = Match;
+  protected teamModel: ModelStatic<Team> = Team;
 
   async getAll(): Promise<IMatch[]> {
     const matches = await this.model.findAll({
@@ -53,10 +55,19 @@ export default class MatchService implements IMatchService {
     homeTeamGoals: number,
     awayTeamGoals: number,
   ): Promise<IMatch> {
+    if (homeTeamId === awayTeamId) {
+      throw new HttpException(422, 'It is not possible to create a match with two equal teams');
+    }
+
+    const homeTeamExists = await this.teamModel.findByPk(homeTeamId);
+    const awayTeamExists = await this.teamModel.findByPk(awayTeamId);
+    if (!homeTeamExists || !awayTeamExists) {
+      throw new HttpException(404, 'There is no team with such id!');
+    }
+
     const macthCreated = await this.model
       .create({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true });
-    // console.log('Log do service');
-    // console.log(macthCreated);
+
     return macthCreated;
   }
 }

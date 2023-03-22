@@ -13,8 +13,8 @@ export default class Leadrboard {
     return res.status(200).json(result);
   }
 
-  async getTable(req: Request, res: Response) {
-    const result = await this._service.getTable();
+  async awayPerfomance(req: Request, res: Response) {
+    const result = await this._service.awayPerfomance();
     return res.status(200).json(result);
   }
 }

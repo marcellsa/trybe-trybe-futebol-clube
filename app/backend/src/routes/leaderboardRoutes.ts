@@ -13,6 +13,9 @@ leaderboardRoutes
   );
 
 leaderboardRoutes
-  .get('/leaderboard', (req: Request, res: Response) => leaderboardController.getTable(req, res));
+  .get(
+    '/leaderboard/away',
+    (req: Request, res: Response) => leaderboardController.awayPerfomance(req, res),
+  );
 
 export default leaderboardRoutes;

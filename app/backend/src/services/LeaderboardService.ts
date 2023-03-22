@@ -3,6 +3,8 @@ import Match from '../database/models/MatchModel';
 import Team from '../database/models/TeamModel';
 import ILeaderboard from '../interfaces/ILeaderboard';
 import ILeaderboardService from '../interfaces/ILeaderboardService';
+import getEfficiency from '../utils/leaderboard/getEfficiency';
+import getGoalsBalance from '../utils/leaderboard/getGoalsBalance';
 import getGoalsFavor from '../utils/leaderboard/getGoalsFavor';
 import getGoalsOwn from '../utils/leaderboard/getGoalsOwn';
 import getTotalDraw from '../utils/leaderboard/getTotalDraw';
@@ -10,6 +12,7 @@ import getTotalGames from '../utils/leaderboard/getTotalGames';
 import getTotalLosses from '../utils/leaderboard/getTotalLosses';
 import getTotalPoints from '../utils/leaderboard/getTotalPoints';
 import getTotalVictories from '../utils/leaderboard/getTotalVictories';
+import sortTable from '../utils/leaderboard/sortTable';
 
 // Tive suporte de Arthur Costa
 export default class LeaderboardService implements ILeaderboardService {
@@ -31,6 +34,8 @@ export default class LeaderboardService implements ILeaderboardService {
       totalLosses: 0,
       goalsFavor: 0,
       goalsOwn: 0,
+      goalsBalance: 0,
+      efficiency: 0,
     }));
     return table1;
   }
@@ -41,7 +46,7 @@ export default class LeaderboardService implements ILeaderboardService {
 
     const finishedMatches = matches.filter((match: Match) => match.dataValues.inProgress === false);
 
-    const table2 = teams.map((team: Team) => ({
+    const tableAtHome = teams.map((team: Team) => ({
       name: team.dataValues.teamName,
       totalPoints: getTotalPoints(Number(team.id), finishedMatches),
       totalGames: getTotalGames(Number(team.id), finishedMatches),
@@ -50,7 +55,10 @@ export default class LeaderboardService implements ILeaderboardService {
       totalLosses: getTotalLosses(Number(team.id), finishedMatches),
       goalsFavor: getGoalsFavor(Number(team.id), finishedMatches),
       goalsOwn: getGoalsOwn(Number(team.id), finishedMatches),
+      goalsBalance: getGoalsBalance(Number(team.id), finishedMatches),
+      efficiency: getEfficiency(Number(team.id), finishedMatches),
     }));
-    return table2;
+
+    return sortTable(tableAtHome);
   }
 }

@@ -15,7 +15,12 @@ export default class LeaderboardService implements ILeaderboardService {
     const teams = await this.teamModel.findAll();
     const matches = await this.matchModel.findAll();
 
-    const finishedMatches = matches.filter((match: Match) => match.dataValues.inProgress === false);
+    const finishedMatches = matches.map((match: Match) => {
+      if (match.dataValues.inProgress === false) {
+        return match.dataValues;
+      }
+      return {};
+    });
 
     const tableHome = generateTable(teams, finishedMatches, 'home');
 
@@ -26,9 +31,14 @@ export default class LeaderboardService implements ILeaderboardService {
     const teams = await this.teamModel.findAll();
     const matches = await this.matchModel.findAll();
 
-    const finishedMatches = matches.filter((match: Match) => match.dataValues.inProgress === false);
+    const finishedMatchesAway = matches.map((match: Match) => {
+      if (match.dataValues.inProgress !== true) {
+        return match.dataValues;
+      }
+      return {};
+    });
 
-    const tableAway = generateTable(teams, finishedMatches, 'away');
+    const tableAway = generateTable(teams, finishedMatchesAway, 'away');
 
     return sortTable(tableAway);
   }

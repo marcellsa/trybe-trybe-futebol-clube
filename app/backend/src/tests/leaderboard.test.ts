@@ -4,8 +4,9 @@ import { app } from '../app';
 import Match from '../database/models/MatchModel';
 import Team from '../database/models/TeamModel';
 import leaderboardHomeMock from './mocks/leaderboardHome.mock';
-import matchesMock from './mocks/matches.mock';
+import matchesDataValuesMock from './mocks/matchesDataValues.mock';
 import teamsMock from './mocks/teams.mock';
+// import teamsDataValuesMock from './mocks/teamsDataValues.mock';
 // @ts-ignoremsa
 import chaiHttp = require('chai-http');
 
@@ -23,10 +24,10 @@ describe('Testes da rota /leaderboard', () => {
     it('Caso 1 - Deve retornar a classificação dos times que jogaram em casa', async () => {
       // Arrange
       sinon.stub(Team, 'findAll').resolves(teamsMock as Team[]);
-      sinon.stub(Match, 'findAll').resolves(matchesMock as unknown as Match[]);
+      sinon.stub(Match, 'findAll').resolves(matchesDataValuesMock as unknown as Match[]);
   
       // Action
-      const response = await chai.request(app).get('/leaderboard/home').send(leaderboardHomeMock);
+      const response = await chai.request(app).get('/leaderboard/home');      
       
       // Assertion
       expect(response.status).to.be.equal(200);

@@ -12,7 +12,7 @@ import getTotalVictories from './getTotalVictories';
 
 const generateTable = (teams: Team[], matches: IMatch[], performance: string | undefined) => {
   const table = teams.map((team: Team) => ({
-    name: team.dataValues.teamName,
+    name: team.teamName,
     totalPoints: getTotalPoints(Number(team.id), matches, performance),
     totalGames: getTotalGames(Number(team.id), matches, performance),
     totalVictories: getTotalVictories(Number(team.id), matches, performance),

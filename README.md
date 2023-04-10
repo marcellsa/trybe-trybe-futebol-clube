@@ -9,14 +9,14 @@ HTML CSS3 JavaScript ReactJS React-router ESlint TypeScript Mysql NodeJS Docker 
 
 Na elaboração deste projeto utilizou-se as seguintes ferramentas:
 
-> Front-end
-HTML
+Front-end
+> HTML
 CSS
 ReactJS
 React router
 
-> Back-end
-Express
+Back-end
+> Express
 TypeScript
 Docker
 Sequelize

@@ -27,8 +27,8 @@ Testes em Back-end
 Mocha
 Chai
 Sinon
-Alinhamento de código
-ESlint
+
+
 Obs.: Os arquivos presentes na pasta front-end foram disponibilizados pela Trybe para a realização deste projeto.
 
 ## Execução

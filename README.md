@@ -23,7 +23,7 @@ Sequelize
 MySQL
 JWT
 Arquitetura Model-Service-Controller
-Testes em Back-end
+Testes
 Mocha
 Chai
 Sinon
@@ -34,7 +34,7 @@ Obs.: Os arquivos presentes na pasta front-end foram disponibilizados pela Trybe
 ## Execução
 Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
 
-git clone git@github.com:larissaperinoto/trybe-futebol-clube.git
+git clone git@github.com:marcellsa/trybe-trybe-futebol-clube.git
 Navegue até a raíz do projeto.
 
 cd trybe-futebol-clube/
